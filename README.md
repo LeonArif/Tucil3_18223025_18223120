@@ -35,8 +35,8 @@ Bonus yang dikerjakan:
 
 ## Requirement
 
-- Python 3.10+ (disarankan 3.11+).
-- Library tambahan tidak wajib (GUI menggunakan `tkinter` bawaan Python).
+- Go 1.20+ (disarankan versi terbaru dari Go 1.20 ke atas).
+- Library tambahan tidak wajib untuk mode CLI. GUI menggunakan kode yang disertakan dalam repository; tidak ada dependensi eksternal yang harus diinstal secara manual.
 
 ## Format Input
 
@@ -52,13 +52,20 @@ Contoh ada di `test/sample1.txt`.
 Mode CLI:
 
 ```bash
-python src/main.py
+go run ./src
+```
+
+Atau build terlebih dahulu dan jalankan binary:
+
+```bash
+go build -o bin/tucil3 ./src
+./bin/tucil3
 ```
 
 Mode GUI:
 
 ```bash
-python src/main.py --gui
+go run ./src --gui
 ```
 
 ## Contoh Alur CLI
