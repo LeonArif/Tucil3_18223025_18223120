@@ -645,6 +645,12 @@ var guiHTML = `<!doctype html>
 								<button id="prevBtn" class="secondary" type="button" disabled>Prev</button>
 								<button id="playBtn" class="secondary" type="button" disabled>Play</button>
 								<button id="nextBtn" class="secondary" type="button" disabled>Next</button>
+								<select id="speedSelect" class="secondary" style="width: auto; padding: 12px; border-radius: 14px; outline: none; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.08); color: var(--text);">
+									<option value="1200">0.5x (Lambat)</option>
+									<option value="700" selected>1.0x (Normal)</option>
+									<option value="350">2.0x (Cepat)</option>
+									<option value="150">5.0x (Sangat Cepat)</option>
+								</select>
 							</div>
 							<div class="muted" id="frameCounter">Step 0 of 0</div>
 							<div class="footer-note">Use the slider to inspect the reconstructed path one frame at a time.</div>
@@ -674,6 +680,7 @@ var guiHTML = `<!doctype html>
 		const prevBtn = document.getElementById('prevBtn');
 		const playBtn = document.getElementById('playBtn');
 		const nextBtn = document.getElementById('nextBtn');
+		const speedSelect = document.getElementById('speedSelect');
 		const downloadBtn = document.getElementById('downloadBtn');
 		const algorithm = document.getElementById('algorithm');
 		const heuristic = document.getElementById('heuristic');
@@ -814,16 +821,25 @@ var guiHTML = `<!doctype html>
 				playTimer = null;
 			}
 			if (playing) {
+				// Ambil nilai kecepatan dinamis dari dropdown
+				const speed = parseInt(speedSelect.value, 10); 
 				playTimer = setInterval(() => {
-					const current = Number(frameSlider.value || 0);
-					if (current >= frames.length - 1) {
-						setPlaying(false);
-						return;
-					}
-					renderFrame(current + 1);
-				}, 700);
+						const current = Number(frameSlider.value || 0);
+						if (current >= frames.length - 1) {
+							setPlaying(false);
+							return;
+						}
+						renderFrame(current + 1);
+				}, speed);
 			}
 		}
+
+		speedSelect.addEventListener('change', () => {
+			if (playing) {
+				setPlaying(false);
+				setPlaying(true);
+			}
+		});
 
 		fileInput.addEventListener('change', async () => {
 			const file = fileInput.files && fileInput.files[0];
