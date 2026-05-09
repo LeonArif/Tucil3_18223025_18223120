@@ -88,5 +88,5 @@ go run ./src --gui
 
 ## Author
 
-- 18223025
-- 18223120
+- 18223025 Muhammad Azzam Robbani
+- 18223120 Leonard Arif Sutiono
